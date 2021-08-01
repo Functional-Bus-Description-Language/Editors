@@ -1,7 +1,7 @@
 # Detection
 # ‾‾‾‾‾‾‾‾‾
 
-hook global BufCreate .*[.](fbdl) %{
+hook global BufCreate .*[.](fbdl?) %{
     set-option buffer filetype fbdl
 }
 
@@ -57,11 +57,12 @@ evaluate-commands %sh{
     values="true false"
     meta="import package"
 
-    # For now treat properties also as keywords.
-    # Properties start at second line.
     keywords="
-        const func mask param
-        atomic default doc masters
+        config const func mask param status
+    "
+
+    properties="
+        atomic default doc group masters width
     "
 
     functions="abs ceil floor"
@@ -78,6 +79,7 @@ evaluate-commands %sh{
         add-highlighter shared/fbdl/code/ regex '\b($(join "${values}" '|'))\b' 0:value
         add-highlighter shared/fbdl/code/ regex '\b($(join "${meta}" '|'))\b' 0:meta
         add-highlighter shared/fbdl/code/ regex '\b($(join "${keywords}" '|'))\b' 0:keyword
+        add-highlighter shared/fbdl/code/ regex '\b($(join "${properties}" '|'))\b' 0:attribute
         add-highlighter shared/fbdl/code/ regex '\b($(join "${functions}" '|'))\b\(' 1:builtin
     "
 }
