@@ -60,7 +60,7 @@ evaluate-commands %sh{
 
     properties="atomic default doc group masters width"
 
-    functions="abs ceil floor log log2"
+    functions="abs ceil floor log log2 log10"
 
     types="bus block config func mask param status"
 
