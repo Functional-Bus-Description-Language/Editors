@@ -55,17 +55,14 @@ add-highlighter shared/fbdl/code/ regex '\b\d+\.' 0:value
 
 evaluate-commands %sh{
     values="true false"
-    meta="import package"
 
-    keywords="
-        config const func mask param status
-    "
+    keywords="const import type"
 
-    properties="
-        atomic default doc group masters width
-    "
+    properties="atomic default doc group masters width"
 
-    functions="abs ceil floor"
+    functions="abs ceil floor log log2"
+
+    types="bus block config func mask param status"
 
     join() { sep=$2; eval set -- $1; IFS="$sep"; echo "$*"; }
 
@@ -79,7 +76,8 @@ evaluate-commands %sh{
         add-highlighter shared/fbdl/code/ regex '\b($(join "${values}" '|'))\b' 0:value
         add-highlighter shared/fbdl/code/ regex '\b($(join "${meta}" '|'))\b' 0:meta
         add-highlighter shared/fbdl/code/ regex '\b($(join "${keywords}" '|'))\b' 0:keyword
-        add-highlighter shared/fbdl/code/ regex '\b($(join "${properties}" '|'))\b' 0:attribute
+        add-highlighter shared/fbdl/code/ regex '\b($(join "${types}" '|'))\b' 0:type
+        add-highlighter shared/fbdl/code/ regex '(^\s*\b($(join "${properties}" '|')))\b' 2:attribute
         add-highlighter shared/fbdl/code/ regex '\b($(join "${functions}" '|'))\b\(' 1:builtin
     "
 }
