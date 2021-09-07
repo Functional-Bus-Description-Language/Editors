@@ -58,7 +58,7 @@ evaluate-commands %sh{
 
     keywords="const import type"
 
-    properties="atomic default doc groups masters range width"
+    properties="atomic default doc groups masters once range width"
 
     functions="abs ceil floor log log2 log10"
 
