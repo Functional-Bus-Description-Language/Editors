@@ -76,7 +76,7 @@ evaluate-commands %sh{
         add-highlighter shared/fbdl/code/ regex '\b($(join "${values}" '|'))\b' 0:value
         add-highlighter shared/fbdl/code/ regex '\b($(join "${meta}" '|'))\b' 0:meta
         add-highlighter shared/fbdl/code/ regex '\b($(join "${keywords}" '|'))\b' 0:keyword
-        add-highlighter shared/fbdl/code/ regex '\b($(join "${types}" '|'))\b' 0:type
+        add-highlighter shared/fbdl/code/ regex '[^\t]\b($(join "${types}" '|'))\b' 0:type
         add-highlighter shared/fbdl/code/ regex '(^\s*\b($(join "${properties}" '|')))\b' 2:attribute
         add-highlighter shared/fbdl/code/ regex '\b($(join "${functions}" '|'))\b\(' 1:builtin
     "
