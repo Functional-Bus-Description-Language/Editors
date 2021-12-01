@@ -45,6 +45,11 @@ add-highlighter shared/fbdl/code/ regex '(?i)\b0x[\da-f]+l?\b' 0:value
 add-highlighter shared/fbdl/code/ regex '(?i)\b0o?[0-7]+l?\b' 0:value
 add-highlighter shared/fbdl/code/ regex '(?i)\b([1-9]\d*|0)l?\b' 0:value
 
+# Bit string literals. TODO: Do not work, why?.
+add-highlighter shared/fbdl/code/ regex '[bB]"[01_]*"' 0:value
+add-highlighter shared/fbdl/code/ regex '[oO]"[01234567_]*"' 0:value
+add-highlighter shared/fbdl/code/ regex '(?i)x"[0123456789abcdef_]*"' 0:value
+
 # Float formats
 add-highlighter shared/fbdl/code/ regex '\b\d+[eE][+-]?\d+\b' 0:value
 add-highlighter shared/fbdl/code/ regex '(\b\d+)?\.\d+\b' 0:value
@@ -77,7 +82,7 @@ evaluate-commands %sh{
         add-highlighter shared/fbdl/code/ regex '\b($(join "${meta}" '|'))\b' 0:meta
         add-highlighter shared/fbdl/code/ regex '\b($(join "${keywords}" '|'))\b' 0:keyword
         add-highlighter shared/fbdl/code/ regex '[^\t]\b($(join "${types}" '|'))\b' 1:type
-        add-highlighter shared/fbdl/code/ regex '(^\s*\b($(join "${properties}" '|')))\b' 2:attribute
+        add-highlighter shared/fbdl/code/ regex '((^|;)\s*\b($(join "${properties}" '|'))\b\s*=)' 3:attribute
         add-highlighter shared/fbdl/code/ regex '\b($(join "${functions}" '|'))\b\(' 1:builtin
     "
 }
