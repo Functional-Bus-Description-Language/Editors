@@ -63,11 +63,11 @@ evaluate-commands %sh{
 
     keywords="const import type"
 
-    properties="atomic default doc groups masters once range width"
+    properties="atomic default groups masters once range width"
 
     functions="abs ceil floor log log2 log10"
 
-    types="bus block config func mask param status"
+    types="block bus config func mask param return status stream"
 
     join() { sep=$2; eval set -- $1; IFS="$sep"; echo "$*"; }
 
