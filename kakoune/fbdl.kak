@@ -65,9 +65,9 @@ evaluate-commands %sh{
 
     properties="atomic default groups masters once range width"
 
-    functions="abs ceil floor log log2 log10"
+    functions="abs bool ceil floor log log2 log10"
 
-    types="block bus config func mask param return status stream"
+    types="block bus config func mask param return status stream static"
 
     join() { sep=$2; eval set -- $1; IFS="$sep"; echo "$*"; }
 
