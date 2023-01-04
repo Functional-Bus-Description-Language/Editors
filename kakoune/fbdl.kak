@@ -61,25 +61,27 @@ add-highlighter shared/fbdl/code/ regex '\b\d+\.' 0:value
 evaluate-commands %sh{
     values="true false"
 
+    time_units="ns us ms s"
+
     keywords="const import type"
 
     properties="atomic default groups masters once range width"
 
     functions="abs bool ceil floor log log2 log10"
 
-    types="block bus config func mask param return status stream static"
+    types="block bus config mask param proc return status stream static"
 
     join() { sep=$2; eval set -- $1; IFS="$sep"; echo "$*"; }
 
     # Add the language's grammar to the static completion list
-    printf %s\\n "declare-option str-list fbdl_static_words $(join "${values} ${meta} ${attributes} ${methods} ${keywords} ${types} ${functions}" ' ')"
+    printf %s\\n "declare-option str-list fbdl_static_words $(join "${values} ${time_units} ${attributes} ${methods} ${keywords} ${types} ${functions}" ' ')"
 
 #        add-highlighter shared/fbdl/code/ regex '\b($(join "${attributes}" '|'))\b' 0:attribute
 #        add-highlighter shared/fbdl/code/ regex '\b($(join "${types}" '|'))\b' 0:type
     # Highlight keywords
     printf %s "
         add-highlighter shared/fbdl/code/ regex '\b($(join "${values}" '|'))\b' 0:value
-        add-highlighter shared/fbdl/code/ regex '\b($(join "${meta}" '|'))\b' 0:meta
+        add-highlighter shared/fbdl/code/ regex '\d+\s+\b($(join "${time_units}" '|'))\b' 1:meta
         add-highlighter shared/fbdl/code/ regex '\b($(join "${keywords}" '|'))\b' 0:keyword
         add-highlighter shared/fbdl/code/ regex '[^\t]\b($(join "${types}" '|'))\b' 1:type
         add-highlighter shared/fbdl/code/ regex '((^|;)\s*\b($(join "${properties}" '|'))\b\s*=)' 3:attribute
