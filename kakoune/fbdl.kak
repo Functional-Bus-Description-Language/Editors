@@ -58,6 +58,8 @@ add-highlighter shared/fbdl/code/ regex '\b\d+\.' 0:value
 #add-highlighter shared/fbdl/docstring/ default-region fill documentation
 #add-highlighter shared/fbdl/docstring/ region '(>>>|\.\.\.) \K'    (?=''')|(?=""") ref fbdl
 
+add-highlighter shared/fbdl/code/ regex (?<=[\w\s\d\)\]'"_])(<=|<<|>>|>=|<>?|>|!=|==|\||\^|&|\+|-|\*\*?|//?|%|~) 0:operator
+
 evaluate-commands %sh{
     values="true false"
 
@@ -65,11 +67,11 @@ evaluate-commands %sh{
 
     keywords="const import type"
 
-    properties="atomic default groups masters once range width"
+    properties="atomic delay groups masters range width init-value read-value reset-value"
 
     functions="abs bool ceil floor log log2 log10"
 
-    types="block bus config mask param proc return status stream static"
+    types="block bus config mask memory param proc return status stream static"
 
     join() { sep=$2; eval set -- $1; IFS="$sep"; echo "$*"; }
 
@@ -89,7 +91,6 @@ evaluate-commands %sh{
     "
 }
 
-add-highlighter shared/fbdl/code/ regex (?<=[\w\s\d\)\]'"_])(<=|<<|>>|>=|<>?|>|!=|==|\||\^|&|\+|-|\*\*?|//?|%|~) 0:operator
 #add-highlighter shared/fbdl/code/ regex (?<=[\w\s\d'"_])((?<![=<>!]):?=(?![=])|[+*-]=) 0:builtin
 #add-highlighter shared/fbdl/code/ regex ^\h*(?:from|import)\h+(\S+) 1:module
 
