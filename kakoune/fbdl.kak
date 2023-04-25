@@ -67,11 +67,24 @@ evaluate-commands %sh{
 
     keywords="const import type"
 
-    properties="atomic delay groups masters range width init-value read-value reset-value"
+    properties="
+        access add-enable atomic
+        byte-write-enable
+        clear
+        delay
+        enable-init-value enable-reset-value
+        groups
+        init-value in-trigger
+        masters
+        out-trigger
+        range read-latency read-value reset reset-value
+        size
+        width
+    "
 
     functions="abs bool ceil floor log log2 log10"
 
-    types="block bus config mask memory param proc return status stream static"
+    types="block bus config irq mask memory param proc return status stream static"
 
     join() { sep=$2; eval set -- $1; IFS="$sep"; echo "$*"; }
 
