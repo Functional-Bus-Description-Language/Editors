@@ -65,7 +65,7 @@ evaluate-commands %sh{
 
     time_units="ns us ms s"
 
-    keywords="const import type"
+    keywords="const if import type"
 
     properties="
         access add-enable atomic
@@ -73,7 +73,6 @@ evaluate-commands %sh{
         clear
         delay
         enable-init-value enable-reset-value
-        groups
         init-value in-trigger
         masters
         out-trigger
@@ -84,7 +83,7 @@ evaluate-commands %sh{
 
     functions="abs bool ceil floor log log2 log10"
 
-    types="block bus config irq mask memory param proc return status stream static"
+    types="blackbox block bus config group irq mask memory param proc return status stream static"
 
     join() { sep=$2; eval set -- $1; IFS="$sep"; echo "$*"; }
 
@@ -122,7 +121,7 @@ define-command -hidden fbdl-indent-on-new-line %<
         # preserve previous line indent
         try %{ execute-keys -draft <semicolon> K <a-&> }
         # cleanup trailing whitespaces from previous line
-        try %{ execute-keys -draft k <a-x> s \h+$ <ret> d }
+        try %{ execute-keys -draft k x s \h+$ <ret> d }
         # indent after line ending with :
         try %{ execute-keys -draft <space> k <a-x> <a-k> :$ <ret> <a-K> ^\h*# <ret> j <a-gt> }
         # deindent closing brace/bracket when after cursor (for arrays and dictionaries)
